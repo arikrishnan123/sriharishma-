@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Love Login 💖</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Love Story 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -18,43 +18,22 @@ body{
   font-family:'Poppins',sans-serif;
   overflow:hidden;
 }
+canvas{position:fixed;inset:0;pointer-events:none;z-index:9999}
 
-canvas{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:9999;
-}
-
-/* BIG CARD */
 .card{
   width:min(900px,95vw);
   min-height:520px;
   background:rgba(255,255,255,.95);
-  backdrop-filter:blur(10px);
   padding:40px;
   border-radius:30px;
   text-align:center;
   box-shadow:0 25px 70px rgba(0,0,0,.18);
-  animation:pop .4s ease;
-}
-
-@keyframes pop{
-  from{transform:scale(.9);opacity:0}
-  to{transform:scale(1);opacity:1}
 }
 
 .name{
   font-family:'Great Vibes',cursive;
-  font-size:clamp(60px,7vw,90px);
+  font-size:80px;
   color:#ff2f7d;
-  text-shadow:0 0 18px rgba(255,47,125,.7);
-}
-
-/* LOGIN */
-.login-sub{
-  font-size:28px;
-  margin:10px 0 30px;
 }
 
 .love-input{
@@ -67,8 +46,7 @@ canvas{
   text-align:center;
 }
 
-.login-btn{
-  margin-top:24px;
+.btn{
   padding:18px 50px;
   font-size:22px;
   font-weight:800;
@@ -77,40 +55,17 @@ canvas{
   border:none;
   border-radius:999px;
   cursor:pointer;
-  box-shadow:0 14px 30px rgba(0,0,0,.25);
 }
 
-.warning{
-  margin-top:20px;
-  font-size:20px;
-  color:#e11d48;
-  font-weight:700;
-}
+.warning{margin-top:20px;color:#e11d48;font-size:20px}
 
-/* VALENTINE */
-.art{
-  width:340px;
-  margin:20px auto;
-  border-radius:26px;
-  box-shadow:0 16px 36px rgba(0,0,0,.25);
-}
-
-.love{
-  font-size:30px;
-  font-weight:800;
-  color:#ff2f7d;
-}
-
-h1{
-  font-size:36px;
-  margin:18px 0;
-}
+.art{width:340px;border-radius:26px;margin:20px auto}
 
 .button-zone{
   position:relative;
   width:520px;
   height:160px;
-  margin:20px auto;
+  margin:auto;
 }
 
 button{
@@ -123,27 +78,30 @@ button{
   border-radius:999px;
   border:none;
   cursor:pointer;
-  box-shadow:0 12px 26px rgba(0,0,0,.25);
 }
 
-#yesBtn{
-  left:15%;
-  background:#ff2f7d;
-  color:white;
+#yesBtn{left:15%;background:#ff2f7d;color:white}
+#noBtn{left:65%;background:#e5e7eb}
+
+.memories img{
+  width:220px;
+  border-radius:20px;
+  margin:10px;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
-#noBtn{
-  left:65%;
-  background:#e5e7eb;
+.notes{
+  margin-top:20px;
+  font-size:20px;
+  line-height:1.6;
+  color:#444;
 }
 
-.hint{
-  font-size:16px;
-  opacity:.7;
-}
-
-.result{
-  display:none;
+.forever{
+  font-size:26px;
+  line-height:1.7;
+  color:#333;
+  margin-top:30px;
 }
 </style>
 </head>
@@ -152,58 +110,76 @@ button{
 
 <canvas id="confetti"></canvas>
 
-<!-- LOGIN PAGE -->
+<!-- 1️⃣ LOGIN -->
 <div class="card" id="loginCard">
   <div class="name">💖 Love Login 💖</div>
-  <div class="login-sub">Enter Your Love Details 😘</div>
-
-  <input class="love-input" id="username" placeholder="💌 Love Username">
-  <input class="love-input" id="password" type="password" placeholder="🔐 Love Password">
-
-  <br>
-  <button class="login-btn" onclick="login()">Login 💕</button>
+  <input class="love-input" id="username" placeholder="Love Username">
+  <input class="love-input" id="password" type="password" placeholder="Love Password">
+  <br><br>
+  <button class="btn" onclick="login()">Login 💕</button>
   <div class="warning" id="warning"></div>
 </div>
 
-<!-- VALENTINE PAGE -->
+<!-- 2️⃣ VALENTINE -->
 <div class="card" id="valentineCard" style="display:none">
-
   <div class="name">SriArishma 🖤</div>
-
-  <img class="art" src="babyheartholding.png">
-  <div class="love">I Love You 🖤</div>
-
+  <img src="babyheartholding.png" class="art">
   <h1>Will you be my Valentine? 💖</h1>
 
   <div class="button-zone" id="zone">
     <button id="yesBtn">Yes 😍</button>
     <button id="noBtn">No 🙈</button>
   </div>
+</div>
 
-  <div class="hint">No button romba shy-ah iruku 😈</div>
+<!-- 3️⃣ MEMORIES -->
+<div class="card" id="memoryCard" style="display:none">
+  <div class="name">Our Memories 💕</div>
 
-  <div class="result" id="result">
-    <h2>YAYYYYY 💕🎉</h2>
-    <img src="sriimage.jpeg" width="320">
+  <div class="memories">
+    <img src="sriimage.jpeg">
+    <img src="photo1.jpeg">
+    <img src="photo2.jpeg">
   </div>
 
+  <div class="notes">
+    Nee siricha andha oru second-la,<br>
+    en world full-aa light aagum 🖤<br><br>
+
+    Sandhosham, sanda, silence ellame<br>
+    unna kooda share pannum pothu thaan meaning 💕
+  </div>
+
+  <br>
+  <button class="btn" onclick="goForever()">Next 💍</button>
+</div>
+
+<!-- 4️⃣ FOREVER YOURS -->
+<div class="card" id="foreverCard" style="display:none">
+  <div class="name">Forever Yours 💍</div>
+
+  <div class="forever">
+    Today is just Valentine’s Day 💖<br>
+    But my promise is for a lifetime 🖤<br><br>
+
+    Kai pidichu nadakka,<br>
+    sandhosham-um kastam-um share panna,<br>
+    last breath varaikum…<br><br>
+
+    **Unnudan thaan. Always. Forever.** 💍
+  </div>
 </div>
 
 <script>
-const canvas=document.getElementById("confetti");
-const confettiInstance=confetti.create(canvas,{resize:true});
+const confettiInstance=confetti.create(document.getElementById("confetti"),{resize:true});
 
 function login(){
-  const u=username.value;
-  const p=password.value;
-  const warn=warning;
-
-  if(u==="sri" && p==="sriarishma143"){
+  if(username.value==="sri" && password.value==="sriarishma143"){
     loginCard.style.display="none";
     valentineCard.style.display="block";
-    confettiInstance({particleCount:250,spread:160});
+    confettiInstance({particleCount:200,spread:150});
   }else{
-    warn.innerText="En mela vachiruka love poiyaaa 💔🥺";
+    warning.innerText="En mela vachiruka love poiyaaa 💔🥺";
   }
 }
 
@@ -220,10 +196,16 @@ zone.addEventListener("mousemove",e=>{
 });
 
 yesBtn.onclick=()=>{
-  zone.style.display="none";
-  result.style.display="block";
+  valentineCard.style.display="none";
+  memoryCard.style.display="block";
   confettiInstance({particleCount:300,spread:180});
 };
+
+function goForever(){
+  memoryCard.style.display="none";
+  foreverCard.style.display="block";
+  confettiInstance({particleCount:500,spread:220});
+}
 </script>
 
 </body>
