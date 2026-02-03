@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Will you be my Valentine?</title>
+  <title>Love Login 💖</title>
 
   <!-- Romantic Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
@@ -37,6 +37,12 @@
       border-radius: 26px;
       text-align: center;
       box-shadow: 0 20px 60px rgba(0,0,0,.15);
+      animation: pop .4s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     /* NAME */
@@ -45,12 +51,35 @@
       font-size: clamp(48px, 6vw, 72px);
       color: #ff2f7d;
       text-shadow: 0 0 12px rgba(255,47,125,.6);
-      animation: glow 2s infinite alternate;
     }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #ff77a9; }
-      to   { text-shadow: 0 0 22px #ff2f7d; }
+    .love-input {
+      width: 80%;
+      padding: 14px;
+      margin: 10px 0;
+      border-radius: 12px;
+      border: 2px solid #ff77a9;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .login-btn {
+      margin-top: 14px;
+      padding: 14px 30px;
+      font-size: 18px;
+      font-weight: 800;
+      background: #ff2f7d;
+      color: white;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0,0,0,.2);
+    }
+
+    .warning {
+      margin-top: 12px;
+      color: red;
+      font-weight: 600;
     }
 
     /* IMAGE */
@@ -111,12 +140,6 @@
 
     .result {
       display: none;
-      animation: pop .4s ease;
-    }
-
-    @keyframes pop {
-      from { transform: scale(.9); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
@@ -125,15 +148,26 @@
 
 <canvas id="confetti"></canvas>
 
-<div class="card">
+<!-- 💖 LOGIN PAGE -->
+<div class="card" id="loginCard">
+  <div class="name">💖 Love Login 💖</div>
 
-  <!-- NAME -->
-  <div class="name">SriArishma 🖤 </div>
+  <h1>Enter Your Love Details 😘</h1>
 
-  <!-- AI STYLE IMAGE -->
-  <img class="art"
-    src="https://cdn.pixabay.com/photo/2023/02/14/10/45/ai-generated-7788912_1280.png"
-    alt="Baby holding heart balloon">
+  <input type="text" id="username" placeholder="💌 Love Username" class="love-input">
+  <input type="password" id="password" placeholder="🔐 Love Password" class="love-input">
+
+  <button class="login-btn" onclick="login()">Login 💕</button>
+
+  <p class="warning" id="warning"></p>
+</div>
+
+<!-- 💘 VALENTINE PAGE -->
+<div class="card" id="valentineCard" style="display:none;">
+
+  <div class="name">SriArishma 🖤</div>
+
+  <img class="art" src="babyheartholding.png" alt="Love Art">
 
   <div class="love">I Love You 🖤</div>
 
@@ -186,6 +220,28 @@ yesBtn.onclick = () => {
   result.style.display = "block";
   confettiInstance({ particleCount: 300, spread: 160 });
 };
+
+// 💖 LOGIN FUNCTION
+function login() {
+  const user = document.getElementById("username").value;
+  const pass = document.getElementById("password").value;
+  const warning = document.getElementById("warning");
+
+  // 🔐 CHANGE THESE
+  const correctUser = "sri";
+  const correctPass = "sriarishma143";
+
+  if (user === correctUser && pass === correctPass) {
+    document.getElementById("loginCard").style.display = "none";
+    document.getElementById("valentineCard").style.display = "block";
+    confettiInstance({ particleCount: 200, spread: 140 });
+  } else {
+    const msgs = [
+      "En mela vachiruka love poiyaaa 💔🥺!!!"
+    ];
+    warning.innerText = msgs[Math.floor(Math.random() * msgs.length)];
+  }
+}
 </script>
 
 </body>
